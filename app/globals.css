@@ -33,3 +33,7 @@ body {
 .outline_btn {
     @apply rounded-full border border-teal-300 bg-transparent py-1.5 px-5 text-black transition-all hover:bg-teal-300 hover:text-white text-center text-sm  flex items-center justify-center;
 }
+
+.underline_link {
+    @apply hover:underline decoration-teal-300 transition-all;
+}
