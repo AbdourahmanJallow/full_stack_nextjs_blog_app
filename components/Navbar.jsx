@@ -4,8 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
-import { BsBoxArrowRight, BsGithub } from 'react-icons/bs';
-import { BsBoxArrowInLeft } from 'react-icons/bs';
+import { BsBoxArrowRight, BsGithub, BsBoxArrowInRight } from 'react-icons/bs';
 import { MdPostAdd } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -70,14 +69,14 @@ function Navbar() {
                                         : `/assets/profile.png`
                                 }
                                 alt='Profile'
-                                width={30}
-                                height={30}
+                                width={50}
+                                height={50}
                                 className='object-contain rounded-full'
                             />
                         </Link>
                     </div>
                 ) : (
-                    <>
+                    <div className='flex gap-3'>
                         {providers &&
                             Object.values(providers).map((provider) => (
                                 <button
@@ -87,19 +86,19 @@ function Navbar() {
                                     key={provider.name}
                                 >
                                     {provider.name}
-                                    <BsBoxArrowInLeft
+                                    <BsBoxArrowInRight
                                         className='ml-2 inline-block'
                                         size={25}
                                     />
                                 </button>
                             ))}
-                    </>
+                    </div>
                 )}
             </div>
 
             {/* Mobile Navigation */}
             <div className='flex sm:hidden relative'>
-                {isLoggedIn ? (
+                {session?.user ? (
                     <div className='flex flex-col'>
                         <Image
                             src='/assets/profile.png'
@@ -147,7 +146,7 @@ function Navbar() {
                         )}
                     </div>
                 ) : (
-                    <>
+                    <div className='flex gap-3'>
                         {providers &&
                             Object.values(providers).map((provider) => (
                                 <button
@@ -157,13 +156,13 @@ function Navbar() {
                                     key={provider.name}
                                 >
                                     {provider.name}
-                                    <BsBoxArrowInLeft
+                                    <BsBoxArrowInRight
                                         className='ml-2 inline-block'
                                         size={25}
                                     />
                                 </button>
                             ))}
-                    </>
+                    </div>
                 )}
             </div>
         </nav>
