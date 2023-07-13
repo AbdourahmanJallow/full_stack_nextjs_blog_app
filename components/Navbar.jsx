@@ -7,12 +7,15 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import { BsBoxArrowRight, BsGithub, BsBoxArrowInRight } from 'react-icons/bs';
 import { MdPostAdd } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
+import { usePathname } from 'next/navigation';
 
 function Navbar() {
     const isLoggedIn = true;
     const { data: session } = useSession();
     const [openDropDown, setOpenDropDown] = useState(false);
     const [providers, setProviders] = useState(null);
+
+    const pathname = usePathname();
 
     useEffect(() => {
         const loadProviders = async () => {
@@ -40,16 +43,20 @@ function Navbar() {
             <div className='sm:flex hidden'>
                 {session?.user ? (
                     <div className='flex justify-evenly p-3 gap-6'>
-                        <Link
-                            href='/new-blog'
-                            className='primary_btn font-semibold'
-                        >
-                            New Blog
-                            <MdPostAdd
-                                className='ml-2 inline-block'
-                                size={25}
-                            />
-                        </Link>
+                        {pathname === '/new-blog' ? (
+                            ''
+                        ) : (
+                            <Link
+                                href='/new-blog'
+                                className='primary_btn font-semibold'
+                            >
+                                New Blog
+                                <MdPostAdd
+                                    className='ml-2 inline-block'
+                                    size={25}
+                                />
+                            </Link>
+                        )}
                         <button
                             type='button'
                             onClick={signOut}
@@ -117,17 +124,21 @@ function Navbar() {
                                 >
                                     My Profile
                                 </Link>
-                                <Link
-                                    href='/new-blog'
-                                    className='text-sm text-teal-300 flex justify-center'
-                                    onClick={() => setOpenDropDown(false)}
-                                >
-                                    New Blog
-                                    <MdPostAdd
-                                        className='ml-2 inline-block'
-                                        size={25}
-                                    />
-                                </Link>
+                                {pathname === '/new-blog' ? (
+                                    ''
+                                ) : (
+                                    <Link
+                                        href='/new-blog'
+                                        className='text-sm text-teal-300 flex justify-center'
+                                        onClick={() => setOpenDropDown(false)}
+                                    >
+                                        New Blog
+                                        <MdPostAdd
+                                            className='ml-2 inline-block'
+                                            size={25}
+                                        />
+                                    </Link>
+                                )}
                                 <button
                                     type='button'
                                     onClick={() => {
