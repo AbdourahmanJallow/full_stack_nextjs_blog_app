@@ -4,14 +4,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
-import { BsBoxArrowRight } from 'react-icons/bs';
+import { BsBoxArrowRight, BsGithub } from 'react-icons/bs';
 import { BsBoxArrowInLeft } from 'react-icons/bs';
 import { MdPostAdd } from 'react-icons/md';
+import { FcGoogle } from 'react-icons/fc';
 
 function Navbar() {
     const isLoggedIn = true;
     const { data: session } = useSession();
     const [openDropDown, setOpenDropDown] = useState(false);
+    const [providers, setProviders] = useState(null);
+
+    useEffect(() => {
+        const loadProviders = async () => {
+            const response = await getProviders();
+            setProviders(response);
+            console.log(response);
+        };
+
+        loadProviders();
+    }, []);
 
     return (
         <nav className='flex justify-between items-center p-6 py-1 w-full mb-16 border-b-2 border-solid border-teal-100'>
@@ -27,7 +39,7 @@ function Navbar() {
 
             {/* Desktop Navigation */}
             <div className='sm:flex hidden'>
-                {isLoggedIn ? (
+                {session?.user ? (
                     <div className='flex justify-evenly p-3 gap-6'>
                         <Link
                             href='/new-blog'
@@ -52,7 +64,11 @@ function Navbar() {
                         </button>
                         <Link href='/profile'>
                             <Image
-                                src='/assets/profile.png'
+                                src={
+                                    session?.user?.image
+                                        ? session.user.image
+                                        : `/assets/profile.png`
+                                }
                                 alt='Profile'
                                 width={30}
                                 height={30}
@@ -62,18 +78,21 @@ function Navbar() {
                     </div>
                 ) : (
                     <>
-                        {Object.values([1]).map((item) => (
-                            <button
-                                type='button'
-                                className='outline_btn font-semibold'
-                            >
-                                Sign in
-                                <BsBoxArrowInLeft
-                                    className='ml-2 inline-block'
-                                    size={25}
-                                />
-                            </button>
-                        ))}
+                        {providers &&
+                            Object.values(providers).map((provider) => (
+                                <button
+                                    type='button'
+                                    className='outline_btn font-semibold'
+                                    onClick={() => signIn(provider.id)}
+                                    key={provider.name}
+                                >
+                                    {provider.name}
+                                    <BsBoxArrowInLeft
+                                        className='ml-2 inline-block'
+                                        size={25}
+                                    />
+                                </button>
+                            ))}
                     </>
                 )}
             </div>
@@ -129,18 +148,21 @@ function Navbar() {
                     </div>
                 ) : (
                     <>
-                        {Object.values([1]).map((item) => (
-                            <button
-                                type='button'
-                                className='outline_btn font-semibold'
-                            >
-                                Sign in
-                                <BsBoxArrowInLeft
-                                    className='ml-2 inline-block'
-                                    size={25}
-                                />
-                            </button>
-                        ))}
+                        {providers &&
+                            Object.values(providers).map((provider) => (
+                                <button
+                                    type='button'
+                                    className='outline_btn font-semibold'
+                                    onClick={() => signIn(provider.id)}
+                                    key={provider.name}
+                                >
+                                    {provider.name}
+                                    <BsBoxArrowInLeft
+                                        className='ml-2 inline-block'
+                                        size={25}
+                                    />
+                                </button>
+                            ))}
                     </>
                 )}
             </div>
