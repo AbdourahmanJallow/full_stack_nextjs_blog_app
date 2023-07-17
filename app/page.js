@@ -10,7 +10,7 @@ export default function Home() {
                     Express Yourself! <br className='max-md:hidden' />
                 </span>{' '}
                 <br />
-                Unleash Your Thoughts and Ideas <br /> with Our Blogging App!
+                Unleash Your Thoughts and Ideas <br /> with Blog Verse!
             </h1>
 
             <Timeline />

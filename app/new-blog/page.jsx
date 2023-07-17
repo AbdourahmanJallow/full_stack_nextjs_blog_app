@@ -6,30 +6,33 @@ import { useRouter } from 'next/navigation';
 import Form from '@/components/Form';
 
 function NewBlog() {
-    const { data: session } = useSession();
     const [sending, setSending] = useState(false);
     const [post, setPost] = useState({
         blog: '',
         category: ''
     });
 
+    const { data: session } = useSession();
     const router = useRouter();
 
     const createBlog = async (e) => {
         e.preventDefault();
         setSending(true);
+        console.log(post);
 
         try {
             const response = await fetch('/api/blog/new', {
                 method: 'POST',
                 body: JSON.stringify({
-                    userId: session?.user?.id,
                     blog: post.blog,
+                    userId: session?.user.id,
                     category: post.category
                 })
             });
+            console.log('POST');
 
             if (response.ok) {
+                console.log('saved');
                 router.push('/');
             }
         } catch (error) {
