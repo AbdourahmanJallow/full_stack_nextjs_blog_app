@@ -1,7 +1,7 @@
 import { connectMongoDB } from '@/utils/database';
 import Blog from '@/utils/blog';
 
-//here define three routes to read individual prompts, update prompts and delete prompts
+//here define three routes to read individual blogs, update blogs and delete blogs
 
 // Read blog (GET)
 export const GET = async (req, { params }) => {
@@ -20,12 +20,13 @@ export const GET = async (req, { params }) => {
 };
 
 // Update blog (PATCH)
-export const PATCH = async (req, { params }) => {
-    const { blog, category } = await req.json();
+export const PATCH = async (request, { params }) => {
+    console.log(params);
+    const { blog, category } = await request.json();
     try {
         await connectMongoDB();
 
-        const existingBlog = Blog.findById(params.id);
+        const existingBlog = await Blog.findById(params.id);
         if (!existingBlog) {
             return new Response('Blog does not exist', { status: 404 });
         }
@@ -33,6 +34,7 @@ export const PATCH = async (req, { params }) => {
         existingBlog.blog = blog;
         existingBlog.category = category;
         existingBlog.save();
+
         return new Response(JSON.stringify(existingBlog), { status: 200 });
     } catch (error) {
         console.log(error);

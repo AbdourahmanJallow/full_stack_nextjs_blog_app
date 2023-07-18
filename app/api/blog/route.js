@@ -7,7 +7,7 @@ export const GET = async (req) => {
 
         const blogs = await Blog.find({}).populate('blogger');
 
-        console.log(blogs);
+        // console.log(blogs);
         return new Response(JSON.stringify(blogs), { status: 200 });
     } catch (error) {
         console.log(error);

@@ -1,30 +1,39 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-function Form({ type, post, setPost, sending, handleFormSubmit }) {
+function Form({
+    type,
+    blogDetails,
+    setBlogDetails,
+    sending,
+    handleFormSubmit
+}) {
     const onChange = (e) => {
-        setPost((prev) => ({
+        setBlogDetails((prev) => ({
             ...prev,
             [e.target.id]: e.target.value
         }));
     };
 
+    const pathname = usePathname();
+
     return (
-        <main className='max-w-3xl'>
+        <main className=''>
             <div className='font-bold flex justify-left mb-16 w-full'>
                 <h2 className='text-5xl text-teal-500 text-left'>
                     {type} Blog
                 </h2>
             </div>
 
-            <form onSubmit={handleFormSubmit} className='w-full'>
+            <form onSubmit={handleFormSubmit} className=''>
                 <div className='mb-4'>
                     <input
                         type='text'
                         id='category'
                         placeholder='Blog Category'
                         required
-                        className='py-1 px-6 border-2 border-teal-200 rounded-md w-full text-gray-400 text-sm'
-                        value={post.category}
+                        className='py-1 px-2 border-2 border-teal-200 rounded-md w-full text-sm'
+                        value={blogDetails.category}
                         onChange={onChange}
                     />
                 </div>
@@ -34,25 +43,24 @@ function Form({ type, post, setPost, sending, handleFormSubmit }) {
                         rows='10'
                         placeholder='Blog Content'
                         required
-                        className='py-1 px-6 border-2 border-teal-200 rounded-md w-full text-gray-400 text-sm'
-                        value={post.blog}
+                        className='py-1 px-2 border-2 border-teal-200 rounded-md w-full text-sm'
+                        value={blogDetails.blog}
                         onChange={onChange}
                     ></textarea>
                 </div>
                 <div className='flex justify-between items-center'>
                     <Link
                         href='/'
-                        className='px-2 py-1 bg-slate-600 rounded-md text-white'
+                        className='px-4 py-1 bg-slate-600 rounded-md text-white text-[.7rem]'
                     >
                         exit
                     </Link>
                     <button
                         type='submit'
                         disabled={sending}
-                        className='px-4 py-1 bg-teal-300 rounded-md text-white'
-                        // onClick={() => handleFormSubmit()}
+                        className='px-4 py-1 bg-teal-300 rounded-md text-white text-[.7rem]'
                     >
-                        create blog
+                        {pathname === '/edit-blog' ? 'edit' : 'create'} blog
                     </button>
                 </div>
             </form>

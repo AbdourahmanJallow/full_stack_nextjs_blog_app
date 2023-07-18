@@ -37,3 +37,7 @@ body {
 .underline_link {
     @apply hover:underline decoration-teal-300 transition-all;
 }
+
+.flex_center {
+    @apply flex justify-center items-center;
+}

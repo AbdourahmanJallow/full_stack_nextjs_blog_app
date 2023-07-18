@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
                 <Provider>
                     <main className='w-screen h-screen flex flex-col justify-between'>
                         <Navbar />
-                        {children}
+                        <div className='container mx-auto'>{children}</div>
                         <Footer />
                     </main>
                 </Provider>

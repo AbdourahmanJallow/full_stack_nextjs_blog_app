@@ -7,7 +7,7 @@ import Form from '@/components/Form';
 
 function NewBlog() {
     const [sending, setSending] = useState(false);
-    const [post, setPost] = useState({
+    const [blogDetails, setBlogDetails] = useState({
         blog: '',
         category: ''
     });
@@ -18,18 +18,18 @@ function NewBlog() {
     const createBlog = async (e) => {
         e.preventDefault();
         setSending(true);
-        console.log(post);
+        console.log(blogDetails);
 
         try {
             const response = await fetch('/api/blog/new', {
-                method: 'POST',
+                method: 'blogDetails',
                 body: JSON.stringify({
-                    blog: post.blog,
+                    blog: blogDetails.blog,
                     userId: session?.user.id,
-                    category: post.category
+                    category: blogDetails.category
                 })
             });
-            console.log('POST');
+            console.log('blogDetails');
 
             if (response.ok) {
                 console.log('saved');
@@ -43,11 +43,11 @@ function NewBlog() {
     };
 
     return (
-        <section className='w-full grid place-content-center'>
+        <section className='flex-col flex_center'>
             <Form
                 type='New'
-                post={post}
-                setPost={setPost}
+                blogDetails={blogDetails}
+                setBlogDetails={setBlogDetails}
                 sending={sending}
                 handleFormSubmit={createBlog}
             />

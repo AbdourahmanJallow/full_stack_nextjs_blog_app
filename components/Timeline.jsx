@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import BlogCard from './BlogCard';
 
-const BlogList = ({ blogs }) => {
+export const BlogList = ({ blogs }) => {
     return (
         <div className='grid grid-cols-1 place-content-center mt-8'>
             {blogs?.map((blog) => (

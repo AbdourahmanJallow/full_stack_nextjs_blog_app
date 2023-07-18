@@ -35,8 +35,11 @@ function Navbar() {
                     alt='image-logo'
                     width={105}
                     height={25}
-                    className='object-contain'
+                    className='object-contain inline-block'
                 />
+                <p className='font-bold text-gray-700 inline-block text-xl ml-[-20px]'>
+                    Verse
+                </p>
             </Link>
 
             {/* Desktop Navigation */}
