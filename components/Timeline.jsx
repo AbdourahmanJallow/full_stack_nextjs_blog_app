@@ -28,12 +28,12 @@ function Timeline() {
         console.log(blogs);
     }, []);
     return (
-        <section className='max-w-3xl flex flex-col mt-16'>
-            <form className='w-full'>
+        <section className='max-w-3xl flex flex-col justify-center items-center mt-16'>
+            <form className='max-w-xs'>
                 <input
                     type='text'
-                    placeholder='Search blogs...'
-                    className='py-1 px-6 border-2 border-teal-200 rounded-md w-full text-gray-400 text-sm'
+                    placeholder='Search by topic...'
+                    className='py-2 px-6 border-2 border-teal-200 rounded-md w-full text-[#333] text-sm'
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                 />

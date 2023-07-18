@@ -10,13 +10,13 @@ function Form({ type, post, setPost, sending, handleFormSubmit }) {
 
     return (
         <main className='max-w-3xl'>
-            <div className='font-bold flex justify-left mb-16'>
+            <div className='font-bold flex justify-left mb-16 w-full'>
                 <h2 className='text-5xl text-teal-500 text-left'>
                     {type} Blog
                 </h2>
             </div>
 
-            <form onSubmit={handleFormSubmit} className='max-w-xl'>
+            <form onSubmit={handleFormSubmit} className='w-full'>
                 <div className='mb-4'>
                     <input
                         type='text'

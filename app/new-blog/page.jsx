@@ -43,7 +43,7 @@ function NewBlog() {
     };
 
     return (
-        <section className='w-full flex justify-center items-center '>
+        <section className='w-full grid place-content-center'>
             <Form
                 type='New'
                 post={post}
