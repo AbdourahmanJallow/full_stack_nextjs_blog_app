@@ -14,7 +14,7 @@ function Footer() {
                 <SiMediafire
                     size={40}
                     className='object-contain'
-                    fill='#e25822'
+                    fill='darkorange'
                 />
             </div>
         </footer>
