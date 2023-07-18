@@ -10,7 +10,6 @@ import { FcGoogle } from 'react-icons/fc';
 import { usePathname } from 'next/navigation';
 
 function Navbar() {
-    const isLoggedIn = true;
     const { data: session } = useSession();
     const [openDropDown, setOpenDropDown] = useState(false);
     const [providers, setProviders] = useState(null);
